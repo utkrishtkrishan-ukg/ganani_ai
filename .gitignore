@@ -1,0 +1,11 @@
+# .env file ko git mein mat daalo — secrets safe rakhne ke liye
+.env
+
+# Virtual environment folder
+venv/
+
+# Python ka compiled cache
+__pycache__/
+
+# Test ke waqt jo WAV files banti hain
+*.wav

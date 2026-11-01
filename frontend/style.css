@@ -1,0 +1,390 @@
+/* =====================================================
+   CampusSathi — style.css
+   Mobile-first, CSS variables se colors control hote hain
+   ===================================================== */
+
+/* --- CSS Variables (colors, spacing, radius) --- */
+:root {
+  --color-primary:       #4F46E5;   /* indigo — brand color */
+  --color-primary-light: #EEF2FF;   /* light indigo background */
+  --color-surface:       #FFFFFF;
+  --color-bg:            #F5F7FA;
+  --color-text:          #1A1A2E;
+  --color-text-muted:    #6B7280;
+  --color-border:        #E5E7EB;
+  --color-bubble-user:   #4F46E5;
+  --color-bubble-bot:    #FFFFFF;
+  --color-chip-bg:       #EEF2FF;
+  --color-chip-border:   #C7D2FE;
+  --color-danger:        #EF4444;   /* mic recording color */
+  --color-success:       #10B981;
+
+  --radius-bubble: 18px;
+  --radius-input:  12px;
+  --radius-chip:   999px;
+
+  --shadow-card: 0 2px 12px rgba(0,0,0,0.08);
+  --shadow-input: 0 2px 8px rgba(0,0,0,0.06);
+
+  --header-height: 64px;
+  --inputbar-height: 84px;
+
+  --font-main: 'Noto Sans Devanagari', 'Inter', sans-serif;
+}
+
+/* --- Reset & Base --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  font-family: var(--font-main);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* Visually hidden — accessibility ke liye (screen readers padhenge) */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* ===== HEADER ===== */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--header-height);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  z-index: 100;
+}
+
+.header__inner {
+  max-width: 720px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header__logo { font-size: 28px; }
+
+.header__title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.header__tagline {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* ===== CHAT WRAPPER (scrollable middle area) ===== */
+.chat-wrapper {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--header-height) 16px calc(var(--inputbar-height) + 16px);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== SUGGESTED CHIPS ===== */
+.chips {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.chips__label {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 12px;
+}
+
+.chips__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.chip {
+  background: var(--color-chip-bg);
+  border: 1px solid var(--color-chip-border);
+  border-radius: var(--radius-chip);
+  padding: 8px 16px;
+  font-family: var(--font-main);
+  font-size: 0.82rem;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.chip:hover { background: #dde4ff; }
+.chip:active { transform: scale(0.97); }
+
+/* ===== CHAT MESSAGES ===== */
+.chat-messages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 16px;
+  padding-bottom: 8px;
+}
+
+/* Each message row */
+.msg {
+  display: flex;
+  flex-direction: column;
+  max-width: 82%;
+}
+
+.msg--user {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.msg--bot {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+/* Bubble */
+.msg__bubble {
+  padding: 10px 14px;
+  border-radius: var(--radius-bubble);
+  box-shadow: var(--shadow-card);
+  font-size: 0.92rem;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.msg--user .msg__bubble {
+  background: var(--color-bubble-user);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.msg--bot .msg__bubble {
+  background: var(--color-bubble-bot);
+  color: var(--color-text);
+  border-bottom-left-radius: 4px;
+  border: 1px solid var(--color-border);
+}
+
+/* Meta row below bot bubble (Listen + Sources) */
+.msg__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.btn--listen {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--color-primary);
+  padding: 2px 6px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.btn--listen:hover { background: var(--color-primary-light); }
+
+/* ===== TYPING INDICATOR ===== */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 14px;
+  background: var(--color-bubble-bot);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-bubble);
+  border-bottom-left-radius: 4px;
+  box-shadow: var(--shadow-card);
+  align-self: flex-start;
+  width: fit-content;
+}
+
+.typing-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+  animation: typingBounce 1s infinite;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.15s; }
+.typing-dot:nth-child(3) { animation-delay: 0.30s; }
+
+@keyframes typingBounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40%            { transform: translateY(-5px); opacity: 1; }
+}
+
+/* ===== INPUT BAR ===== */
+.input-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
+  z-index: 100;
+}
+
+/* Voice status & info bar above input */
+.voice-bar {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 6px 16px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.voice-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-danger);
+  animation: pulseDot 1s infinite alternate;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(1.3); opacity: 1; }
+}
+
+.voice-status-text {
+  font-weight: 500;
+}
+
+.voice-timer {
+  color: var(--color-danger);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.voice-lang-badge {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  border: 1px solid var(--color-chip-border);
+  border-radius: var(--radius-chip);
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.input-bar__inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 10px 16px 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-bar__text {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-input);
+  font-family: var(--font-main);
+  font-size: 0.92rem;
+  outline: none;
+  background: var(--color-bg);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-bar__text:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(79,70,229,0.12);
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  font-family: var(--font-main);
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+
+.btn:active:not(:disabled) { transform: scale(0.96); }
+
+.btn--primary {
+  background: var(--color-primary);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: var(--radius-input);
+  font-size: 0.88rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.btn--primary:hover:not(:disabled) { background: #4338CA; box-shadow: var(--shadow-input); }
+.btn--primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btn--ghost {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  padding: 8px 12px;
+  border-radius: var(--radius-input);
+  font-size: 0.82rem;
+}
+
+.btn--ghost:hover { background: var(--color-bg); }
+
+.btn--icon {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.btn--icon:hover:not(:disabled) { background: var(--color-primary-light); }
+.btn--icon:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Mic recording state — pulsing red */
+.btn--icon.recording {
+  background: var(--color-danger);
+  border-color: var(--color-danger);
+  color: #fff;
+  animation: micPulse 1s infinite;
+}
+
+@keyframes micPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.5); }
+  50%       { box-shadow: 0 0 0 8px rgba(239,68,68,0); }
+}
+
+/* ===== RESPONSIVE — desktop ===== */
+@media (min-width: 600px) {
+  :root { font-size: 16px; }
+
+  .chips__grid { max-width: 560px; margin: 0 auto; }
+
+  .msg { max-width: 70%; }
+}

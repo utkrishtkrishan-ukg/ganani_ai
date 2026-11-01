@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusSathi</title>
+
+  <!-- Hindi text ke liye Noto Sans Devanagari + clean Latin font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header__inner">
+      <div class="header__brand">
+        <span class="header__logo">🎓</span>
+        <div>
+          <h1 class="header__title">CampusSathi</h1>
+          <p class="header__tagline">Aapka college ka AI saathi</p>
+        </div>
+      </div>
+      <!-- New chat button — chat clear karta hai -->
+      <button class="btn btn--ghost" id="newChatBtn" aria-label="New chat shuru karo">
+        ✏️ New Chat
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CHAT AREA ===== -->
+  <main class="chat-wrapper">
+
+    <!-- Suggested chips — sirf tab dikhenge jab chat empty ho -->
+    <section class="chips" id="chipsSection" aria-label="Suggested questions">
+      <p class="chips__label">Ye pooch sakte ho 👇</p>
+      <div class="chips__grid">
+        <button class="chip" data-text="Exam form ki last date kya hai?">Exam form ki last date kya hai?</button>
+        <button class="chip" data-text="What is the minimum attendance required?">What is the minimum attendance required?</button>
+        <button class="chip" data-text="Fees kaise bharni hai?">Fees kaise bharni hai?</button>
+        <button class="chip" data-text="College mein scholarship kaise milegi?">College mein scholarship kaise milegi?</button>
+      </div>
+    </section>
+
+    <!-- Message bubbles yahan aayenge -->
+    <div class="chat-messages" id="chatMessages" role="log" aria-live="polite" aria-label="Chat messages">
+    </div>
+
+  </main>
+
+  <!-- ===== BOTTOM INPUT BAR ===== -->
+  <footer class="input-bar">
+
+    <!-- Voice status & language bar (recording / sun raha hoon / language label) -->
+    <div class="voice-bar" id="voiceBar" style="display: none;">
+      <span class="voice-dot" id="voiceDot"></span>
+      <span class="voice-status-text" id="voiceStatusText">Sun raha hoon...</span>
+      <span class="voice-timer" id="voiceTimer">0s / 28s</span>
+      <span class="voice-lang-badge" id="voiceLangBadge" style="display: none;"></span>
+    </div>
+
+    <div class="input-bar__inner">
+
+      <!-- Accessible label — visually hidden hai -->
+      <label for="userInput" class="sr-only">Apna sawaal likho</label>
+
+      <input
+        type="text"
+        id="userInput"
+        class="input-bar__text"
+        placeholder="Apna sawaal yahan likho ya mic se bolein..."
+        autocomplete="off"
+        aria-label="Apna sawaal likho"
+      />
+
+      <!-- Mic button — voice recording trigger -->
+      <button class="btn btn--icon" id="micBtn" aria-label="Voice se sawaal karo" aria-pressed="false" title="Boliye (Mic)">
+        🎤
+      </button>
+
+      <!-- Send button -->
+      <button class="btn btn--primary" id="sendBtn" aria-label="Message bhejo">
+        Send ➤
+      </button>
+
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
