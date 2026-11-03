@@ -1,12 +1,8 @@
-"""
-config.py — .env file se API key aur base URL load karta hai.
-"""
 
 import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# backend/ folder mein .env file dhundo — chahe kahin se bhi run karo
 _env_path = Path(__file__).resolve().parent.parent / ".env"
 load_dotenv(dotenv_path=_env_path)
 

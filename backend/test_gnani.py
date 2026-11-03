@@ -1,11 +1,7 @@
-"""
-test_gnani.py — TTS aur STT dono ko ek saath test karta hai.
-Run karo: backend/ folder ke andar se   python test_gnani.py
-"""
 
 from app.gnani_client import text_to_speech, speech_to_text
 
-# --- Step 1: Text ko audio mein badlo ---
+
 test_sentence = "नमस्ते, मैं कैंपस साथी हूँ। आपकी कैसे मदद करूँ?"
 print("TTS chal raha hai...")
 
